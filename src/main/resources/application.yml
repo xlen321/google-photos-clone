@@ -22,14 +22,7 @@ spring:
     restart:
       enabled: true
       exclude: static/**
-  
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: ${GOOGLE_CLIENT_ID}
-            client-secret: ${GOOGLE_CLIENT_SECRET}
+
 
 logging:
   level:
@@ -48,7 +41,8 @@ management:
         include: "*"
 
 
-jwt:
-  secret: ${JWT_SECRET_KEY}
-  '[access_token_expiration]': 900000 # 15 minutes
-  '[refresh_token_expiration]': 604800000 # 7 days
+app:
+  jwt:
+    secret: ${JWT_SECRET_KEY}
+    '[access_token_expiration]': 900000 # 15 minutes
+    '[refresh_token_expiration]': 604800000 # 7 days

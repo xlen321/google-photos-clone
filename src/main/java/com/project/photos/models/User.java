@@ -1,6 +1,10 @@
 package com.project.photos.models;
 
+import java.util.Collection;
 import java.util.UUID;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.project.photos.audit.AuditDetails;
 
@@ -29,7 +33,7 @@ import lombok.Setter;
 @Builder 
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends AuditDetails {
+public class User extends AuditDetails implements UserDetails {
   @Id 
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
@@ -42,4 +46,16 @@ public class User extends AuditDetails {
 
   @Column(nullable = false, length = 100)
   private String password;
+
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+  }
+
+  @Override
+  public String getUsername() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+  }
 }
