@@ -3,6 +3,7 @@ package com.project.photos.models;
 import java.util.Collection;
 import java.util.UUID;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -22,19 +23,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(
-  name = "users",
-  indexes = {
+@Table(name = "users", indexes = {
     @Index(name = "idx_user_email", columnList = "email")
-  }
-)
+})
 @Getter
 @Setter
-@Builder 
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class User extends AuditDetails implements UserDetails {
-  @Id 
+  @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
@@ -54,8 +52,12 @@ public class User extends AuditDetails implements UserDetails {
   }
 
   @Override
+  public @Nullable String getPassword() {
+    return this.password;
+  }
+
+  @Override
   public String getUsername() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+    return this.email;
   }
 }

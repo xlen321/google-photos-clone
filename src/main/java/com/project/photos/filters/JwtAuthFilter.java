@@ -1,6 +1,7 @@
 package com.project.photos.filters;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -45,7 +46,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
       String token = authHeader.substring(7).trim();
 
-      Long userId = jwtService.getUserIdFromToken(token);
+      UUID userId = jwtService.getUserIdFromToken(token);
 
       if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
         User user = userService.getUserById(userId);
